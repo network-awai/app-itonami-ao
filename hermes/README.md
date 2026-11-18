@@ -23,3 +23,18 @@ sessions, memories, logs, caches, run state.
 | profile | description |
 |---|---|
 | `usagi-verify` | ao review-path verify: measures the ao/usagi and ao/kame review branches live (2h cron) |
+
+## Inference rail
+
+These are Hermes agents on Awai Otehon. They never name murakumo or mishima —
+not in `model`, `providers`, `fallback_providers`, `auxiliary`, `moa` or a cron
+`model`/`provider` pin (itonami-agent AGENTS.md "Two CLIs"; AWAI-3303). Their
+default is the Awai node's own OpenAI-compatible `/v1` on loopback: provider
+`awai-node`, `http://127.0.0.1:11434/v1`, model `local` (network-awai-apex ADR
+0026 D4; owner decision on AWAI-320). `api.murakumo.cloud` is not a default.
+Other providers already set (openrouter-free, kotoba) stay as they are.
+Inference on Murakumo / mishima belongs to itonami agent profiles.
+
+The node must serve a model under the name `local` on that port. The change is
+to these definitions only. A host profile is updated when it is materialized
+from here, which needs its own operator step.
